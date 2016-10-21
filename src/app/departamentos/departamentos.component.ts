@@ -64,7 +64,7 @@ export class DepartamentosComponent implements OnInit {
         this.servicio1.obtenerDepartamento(id).subscribe(
             dato => this.departamento = dato.data[0],
             err => alert(err),
-            () => { this.llenarFomulario(); console.log(this.paises.find(pais => pais.id === this.idsyspais)); }
+            () => this.llenarFomulario()
         );
     }
 
@@ -148,7 +148,12 @@ export class DepartamentosComponent implements OnInit {
         this.mensaje = '';
         this.valido = true;
 
-        if (this.descripcion === '' || this.codigoiso === '' || this.codigonacional === '' || this.indicativo === '' || this.idsyspais <= 0) {
+        if (this.descripcion === '' ||
+            this.codigoiso === '' ||
+            this.codigonacional === '' ||
+            this.indicativo === '' ||
+            this.idsyspais <= 0) {
+
             this.valido = false;
             this.mensaje = 'Faltan campos por escribir.';
         }

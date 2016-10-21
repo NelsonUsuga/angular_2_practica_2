@@ -14,6 +14,7 @@ export class Servicio1Service {
         parametro = '{"encabezado":{"oid":17}}',
         header = new Headers;
         header.append('content-type', 'application/json');
+
         return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
         /*
         // También funciona sin header
@@ -26,6 +27,7 @@ export class Servicio1Service {
         parametro = '{"encabezado":{"oid":17}, "filtros":{"id":' + id + '}}',
         header = new Headers;
         header.append('content-type', 'application/json');
+
         return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
         /*
         // También funciona sin header
@@ -38,6 +40,7 @@ export class Servicio1Service {
         parametro = '{"encabezado":{"oid":14}}',
         header = new Headers;
         header.append('content-type', 'application/json');
+
         return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
         /*
         // También funciona sin header
@@ -65,6 +68,7 @@ export class Servicio1Service {
             ]
         }`,
         header = new Headers;
+
         header.append('content-type', 'application/json');
         return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
         /*
@@ -77,6 +81,7 @@ export class Servicio1Service {
         urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/borrardepartamento',
         parametro = '{"encabezado": {"oid": 17}, "data": [{"id":' + id + ', "accion":"d"}]}',
         header = new Headers;
+
         header.append('content-type', 'application/json');
         return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
         /*
