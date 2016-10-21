@@ -32,6 +32,18 @@ export class Servicio1Service {
         return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
     }
 
+    obtenerPaises() {
+        let
+        urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/paises',
+        parametro = '{"encabezado":{"oid":14}}',
+        header = new Headers;
+        header.append('content-type', 'application/json');
+        return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
+        /*
+        // También funciona sin header
+        return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
+    }
+
     guardarDepartamento(datos) {
         let
         urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/guardardepartamento',
@@ -45,7 +57,7 @@ export class Servicio1Service {
                 "codigonacional": "` + datos.codigonacional + `",
                 "descripcion": "` + datos.descripcion + `",
                 "indicativo": "` + datos.indicativo + `",
-                "idsyspais": 46,
+                "idsyspais": ` + datos.idsyspais + `,
                 "indicadorsistema": "` + datos.indicadorsistema + `",
                 "codigoiso": "` + datos.codigoiso + `",
                 "accion": "` + datos.accion + `"

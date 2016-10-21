@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Servicio1Service } from '../servicios/servicio1.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { Servicio1Service } from '../servicios/servicio1.service';
     templateUrl: './departamentos.component.html',
     styleUrls: ['./departamentos.component.css']
 })
-export class DepartamentosComponent {
+export class DepartamentosComponent implements OnInit {
 
     // Guarda todos los registros de departamentos
     departamentos: any[];
@@ -14,12 +14,16 @@ export class DepartamentosComponent {
     // Guarda el departamento específico que se va a editar
     departamento: any;
 
+    paises: any[];
+
     id: number;
     descripcion: string;
     codigoiso: string;
     codigonacional: string;
     indicativo: string;
     indicadorsistema: boolean;
+    idsyspais: number;
+    pais: string;
     accion: string;
 
     readonly: boolean;
@@ -33,6 +37,19 @@ export class DepartamentosComponent {
         this.departamento = {};
 
         this.departamentos = [];
+
+        this.paises = [];
+    }
+
+    ngOnInit() {
+        this.listarPaises();
+    }
+
+    listarPaises() {
+        this.servicio1.obtenerPaises().subscribe(
+            dato => this.paises = dato.data,
+            err => alert(err)
+        );
     }
 
     listarDepartamentos() {
@@ -47,8 +64,12 @@ export class DepartamentosComponent {
         this.servicio1.obtenerDepartamento(id).subscribe(
             dato => this.departamento = dato.data[0],
             err => alert(err),
-            () => this.llenarFomulario()
+            () => { this.llenarFomulario(); console.log(this.paises.find(pais => pais.id === this.idsyspais)); }
         );
+    }
+
+    buscarPais(idsyspais: number) {
+        return this.paises.find(pais => pais.id === idsyspais).descripcion;
     }
 
     llenarFomulario() {
@@ -58,6 +79,7 @@ export class DepartamentosComponent {
         this.codigonacional = this.departamento.codigonacional;
         this.indicativo = this.departamento.indicativo;
         this.indicadorsistema = (this.departamento.indicadorsistema === '1');
+        this.idsyspais = this.departamento.idsyspais;
         this.accion = 'u';
 
         // Si el registro es del sistema los campos no se pueden editar
@@ -80,6 +102,7 @@ export class DepartamentosComponent {
         this.departamento.codigonacional = this.codigonacional;
         this.departamento.indicativo = this.indicativo;
         this.departamento.indicadorsistema = (this.indicadorsistema) ? '1' : '0';
+        this.departamento.idsyspais = this.idsyspais;
         this.departamento.accion = this.accion;
 
         this.servicio1.guardarDepartamento(this.departamento).subscribe(
@@ -109,6 +132,8 @@ export class DepartamentosComponent {
         this.codigonacional = '';
         this.indicativo = '';
         this.indicadorsistema = false;
+        this.idsyspais = 0;
+        this.pais = '';
 
         this.accion = 'i';
 
@@ -123,7 +148,7 @@ export class DepartamentosComponent {
         this.mensaje = '';
         this.valido = true;
 
-        if (this.descripcion === '' || this.codigoiso === '' || this.codigonacional === '' || this.indicativo === '') {
+        if (this.descripcion === '' || this.codigoiso === '' || this.codigonacional === '' || this.indicativo === '' || this.idsyspais <= 0) {
             this.valido = false;
             this.mensaje = 'Faltan campos por escribir.';
         }

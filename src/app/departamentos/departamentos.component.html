@@ -1,4 +1,4 @@
-<h3>CRUD de prueba</h3>
+<h3>CRUD de Departamentos</h3>
 
 <div>
 
@@ -32,6 +32,16 @@
 
         <br>
         
+        <div id="divpais">
+            <label for="selpais">País:</label>
+            <select id="selpais" name="selpais" [(ngModel)]="idsyspais" [ngClass]="{inputerror: !valido &amp;&amp; idsyspais <= 0}">
+                <option value="0">--Seleccione país--</option>
+                <option *ngFor="let pais of paises" value="{{pais.id}}">{{pais.descripcion}}</option>
+            </select>
+        </div>
+
+        <br>
+
         <div id="divindicativo">
             <label for="txtindicativo">Indicativo Tél:</label>
             <input type="text" id="txtindicativo" name="txtindicativo"
@@ -55,7 +65,7 @@
     <div id="divbarrabotones">
         <button id="btnlistar" (click)="listarDepartamentos()">Listar</button>
         <button id="btnnuevo" (click)="limpiarFormulario()">Nuevo</button>
-        <button id="btnguardar" (click)="guardarDepartamento()">Grabar</button>
+        <button id="btnguardar" (click)="guardarDepartamento()">Guardar</button>
     </div>
 
     <br>
@@ -66,6 +76,7 @@
                 <th>Descripcion</th>
                 <th>Código ISO</th>
                 <th>Código nacional</th>
+                <th>País</th>
                 <th>Indicativo Tél.</th>
                 <th>Sistema</th>
             </thead>
@@ -74,6 +85,7 @@
                     <td>{{departamento.descripcion}}</td>
                     <td>{{departamento.codigoiso}}</td>
                     <td>{{departamento.codigonacional}}</td>
+                    <td>{{buscarPais(departamento.idsyspais)}}</td>
                     <td>{{departamento.indicativo}}</td>
                     <td>{{(departamento.indicadorsistema === '1') ? 'Si' : 'No'}}</td>
                     <td><button (click)="editarDepartamento(departamento.id)">Editar</button></td>
