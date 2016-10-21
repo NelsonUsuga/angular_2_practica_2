@@ -1,0 +1,85 @@
+<h3>CRUD de prueba</h3>
+
+<div>
+
+    <div id="formulario">
+        <div id="divid" hidden>
+            <label for="txtid">Id:</label>
+            <input type="text" id="txtid" name="txtid" [(ngModel)]="id">
+        </div>
+
+        <div id="divdescripcion">
+            <label for="txtdescripcion">Descripción:</label>
+            <input type="text" id="txtdescripcion" name="txtdescripcion"
+            [(ngModel)]="descripcion" [readonly]="readonly" [ngClass]="{inputerror: !valido &amp;&amp; descripcion === ''}">
+        </div>
+
+        <br>
+        
+        <div id="divcodigoiso">
+            <label for="txtcodigoiso">Código ISO:</label>
+            <input type="text" id="txtcodigoiso" name="txtcodigoiso"
+            [(ngModel)]="codigoiso" [readonly]="readonly" [ngClass]="{inputerror: !valido &amp;&amp; codigoiso === ''}">
+        </div>
+
+        <br>
+        
+        <div id="divcodigonacional">
+            <label for="txtcodigonacional">Código nacional:</label>
+            <input type="text" id="txtcodigonacional" name="txtcodigonacional"
+            [(ngModel)]="codigonacional" [readonly]="readonly" [ngClass]="{inputerror: !valido &amp;&amp; codigonacional === ''}">
+        </div>
+
+        <br>
+        
+        <div id="divindicativo">
+            <label for="txtindicativo">Indicativo Tél:</label>
+            <input type="text" id="txtindicativo" name="txtindicativo"
+            [(ngModel)]="indicativo" [readonly]="readonly" [ngClass]="{inputerror: !valido &amp;&amp; indicativo === ''}">
+        </div>
+
+        <br>
+        
+        <div id="divcindicadorsistema">
+            <label for="ckkindicadorsistema">Sistema:</label>
+            <input type="checkbox" id="chkindicadorsistema" name="chkindicadorsistema" [(ngModel)]="indicadorsistema" [disabled]="readonly">
+        </div>
+    </div>
+
+    <div id="divmensaje" *ngIf="(mensaje !== '')">
+        <p id="mensaje" class="msjerror">{{mensaje}}</p>
+    </div>
+
+    <br>
+
+    <div id="divbarrabotones">
+        <button id="btnlistar" (click)="listarDepartamentos()">Listar</button>
+        <button id="btnnuevo" (click)="limpiarFormulario()">Nuevo</button>
+        <button id="btnguardar" (click)="guardarDepartamento()">Grabar</button>
+    </div>
+
+    <br>
+
+    <div id="tabladatos" *ngIf="departamentos.length &gt; 0">
+        <table border="2">
+            <thead>
+                <th>Descripcion</th>
+                <th>Código ISO</th>
+                <th>Código nacional</th>
+                <th>Indicativo Tél.</th>
+                <th>Sistema</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let departamento of departamentos">
+                    <td>{{departamento.descripcion}}</td>
+                    <td>{{departamento.codigoiso}}</td>
+                    <td>{{departamento.codigonacional}}</td>
+                    <td>{{departamento.indicativo}}</td>
+                    <td>{{(departamento.indicadorsistema === '1') ? 'Si' : 'No'}}</td>
+                    <td><button (click)="editarDepartamento(departamento.id)">Editar</button></td>
+                    <td><button (click)="borrarDepartamento(departamento.id, departamento.indicadorsistema)">Borrar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
