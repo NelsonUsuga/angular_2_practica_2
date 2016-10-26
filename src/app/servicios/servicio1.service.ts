@@ -23,7 +23,7 @@ export class Servicio1Service {
 
     obtenerDepartamento(id: number) {
         let
-        urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/departamentos',
+        urlDepartamentos = 'http://192.168.0.51:3050/krgo/backend/public/operacionbd/departamentos',
         parametro = '{"encabezado":{"oid":17}, "filtros":{"id":' + id + '}}',
         header = new Headers;
         header.append('content-type', 'application/json');
