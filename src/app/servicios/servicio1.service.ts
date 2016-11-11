@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
@@ -10,46 +10,31 @@ export class Servicio1Service {
 
     obtenerDepartamentos() {
         let
-        urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/departamentos',
-        parametro = '{"encabezado":{"oid":17}}',
-        header = new Headers;
-        header.append('content-type', 'application/json');
+        urlDepartamentos = 'http://192.168.0.51:3050/krgo/backend/public/operacionbd/departamentos',
+        parametro = '{"encabezado":{"oid":17}}';
 
-        return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
-        /*
-        // También funciona sin header
-        return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
+        return this.http.post(urlDepartamentos, parametro).map(res => res.json());
     }
 
     obtenerDepartamento(id: number) {
         let
         urlDepartamentos = 'http://192.168.0.51:3050/krgo/backend/public/operacionbd/departamentos',
-        parametro = '{"encabezado":{"oid":17}, "filtros":{"id":' + id + '}}',
-        header = new Headers;
-        header.append('content-type', 'application/json');
+        parametro = '{"encabezado":{"oid":17}, "filtros":{"id":' + id + '}}';
 
-        return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
-        /*
-        // También funciona sin header
-        return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
+        return this.http.post(urlDepartamentos, parametro).map(res => res.json());
     }
 
     obtenerPaises() {
         let
-        urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/paises',
-        parametro = '{"encabezado":{"oid":14}}',
-        header = new Headers;
-        header.append('content-type', 'application/json');
+        urlDepartamentos = 'http://192.168.0.51:3050/krgo/backend/public/operacionbd/paises',
+        parametro = '{"encabezado":{"oid":14}}';
 
-        return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
-        /*
-        // También funciona sin header
-        return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
+        return this.http.post(urlDepartamentos, parametro).map(res => res.json());
     }
 
     guardarDepartamento(datos) {
         let
-        urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/guardardepartamento',
+        urlDepartamentos = 'http://192.168.0.51:3050/krgo/backend/public/operacionbd/guardardepartamento',
         parametro = `{
             "encabezado": {
                 "oid": 17
@@ -66,26 +51,16 @@ export class Servicio1Service {
                 "accion": "` + datos.accion + `"
                 }
             ]
-        }`,
-        header = new Headers;
+        }`;
 
-        header.append('content-type', 'application/json');
-        return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
-        /*
-        // También funciona sin header
-        return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
+        return this.http.post(urlDepartamentos, parametro).map(res => res.json());
     }
 
     borrarDepartamento(id: number) {
         let
-        urlDepartamentos = 'http://192.168.0.134:3050/krgo/backend/public/operacionbd/borrardepartamento',
-        parametro = '{"encabezado": {"oid": 17}, "data": [{"id":' + id + ', "accion":"d"}]}',
-        header = new Headers;
+        urlDepartamentos = 'http://192.168.0.51:3050/krgo/backend/public/operacionbd/borrardepartamento',
+        parametro = '{"encabezado": {"oid": 17}, "data": [{"id":' + id + ', "accion":"d"}]}';
 
-        header.append('content-type', 'application/json');
-        return this.http.post(urlDepartamentos, parametro, { headers: header }).map(res => res.json());
-        /*
-        // También funciona sin header
-        return this.http.post(urlDepartamentos, parametro).map(res => res.json());*/
+        return this.http.post(urlDepartamentos, parametro).map(res => res.json());
     }
 }
